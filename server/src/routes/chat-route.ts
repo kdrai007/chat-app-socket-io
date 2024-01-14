@@ -17,6 +17,6 @@ router.post("/group", Authenticate, GroupChat);
 router.put("/group/rename", Authenticate, RenameGroup);
 // routes for managing chats's users
 router.put("/group/add", Authenticate, AddToGroup);
-router.put("/group/remove", Authenticate, RemoveFromGroup);
+router.delete("/group/remove", Authenticate, RemoveFromGroup);
 
 export default router;

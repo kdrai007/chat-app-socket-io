@@ -91,7 +91,15 @@ export const GetUser = async (req: RequestProps, res: Response) => {
     const user = name
       ? await db.user.findMany({
           where: {
-            username: name,
+            username: {
+              contains: name,
+            },
+          },
+          select: {
+            id: true,
+            email: true,
+            username: true,
+            profileUrl: true,
           },
         })
       : await db.user.findUnique({

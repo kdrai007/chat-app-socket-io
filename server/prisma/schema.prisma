@@ -20,12 +20,12 @@ model Chat {
 
   users User[]
 
-  latestMessage   Message? @relation("latestMessageRelation", fields: [latestMessageId], references: [id])
+  latestMessage   Message? @relation("latestMessageRelation", fields: [latestMessageId], references: [id], onDelete: Cascade)
   latestMessageId String?
 
   messages Message[] @relation("chatRelation")
 
-  groupAdmin String?
+  groupAdmin User[] @relation("adminRelation")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -40,8 +40,8 @@ model User {
   email      String @unique
   profileUrl String @default("https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg")
   password   String
-
-  chats Chat[]
+  chatAdmin  Chat[] @relation("adminRelation")
+  chats      Chat[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
